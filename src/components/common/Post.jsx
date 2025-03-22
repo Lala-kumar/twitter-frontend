@@ -17,7 +17,7 @@ const Post = ({ post }) => {
     queryKey: ["authUser"],
     queryFn: async () => {
       try {
-        const res = await fetch("/api/auth/me");
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/me`);
         const data = await res.json();
         if (data.error) return null;
         if (!res.ok) {
@@ -42,9 +42,12 @@ const Post = ({ post }) => {
   const { mutate: deletePost, isPending: isDeleting } = useMutation({
     mutationFn: async () => {
       try {
-        const res = await fetch(`/api/posts/${post._id}`, {
-          method: "DELETE",
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/posts/${post._id}`,
+          {
+            method: "DELETE",
+          }
+        );
         const data = await res.json();
 
         if (!res.ok) {
@@ -64,9 +67,12 @@ const Post = ({ post }) => {
   const { mutate: likePost, isPending: isLiking } = useMutation({
     mutationFn: async () => {
       try {
-        const res = await fetch(`/api/posts/like/${post._id}`, {
-          method: "POST",
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/posts/like/${post._id}`,
+          {
+            method: "POST",
+          }
+        );
         const data = await res.json();
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");
@@ -98,13 +104,16 @@ const Post = ({ post }) => {
   const { mutate: commentPost, isPending: isCommenting } = useMutation({
     mutationFn: async () => {
       try {
-        const res = await fetch(`/api/posts/comment/${post._id}`, {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ text: comment }),
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/posts/comment/${post._id}`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text: comment }),
+          }
+        );
         const data = await res.json();
 
         if (!res.ok) {

@@ -14,7 +14,7 @@ const CreatePost = () => {
     queryKey: ["authUser"],
     queryFn: async () => {
       try {
-        const res = await fetch("/api/auth/me");
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/me`);
         const data = await res.json();
         if (data.error) return null;
         if (!res.ok) {
@@ -38,13 +38,16 @@ const CreatePost = () => {
   } = useMutation({
     mutationFn: async ({ text, img }) => {
       try {
-        const res = await fetch("/api/posts/create", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({ text, img }),
-        });
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/posts/create`,
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ text, img }),
+          }
+        );
         const data = await res.json();
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");

@@ -30,7 +30,7 @@ const ProfilePage = () => {
     queryKey: ["authUser"],
     queryFn: async () => {
       try {
-        const res = await fetch("/api/auth/me");
+        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/me`);
         const data = await res.json();
         if (data.error) return null;
         if (!res.ok) {
@@ -53,7 +53,9 @@ const ProfilePage = () => {
     queryKey: ["userProfile"],
     queryFn: async () => {
       try {
-        const res = await fetch(`/api/users/profile/${username}`);
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/users/profile/${username}`
+        );
         const data = await res.json();
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");

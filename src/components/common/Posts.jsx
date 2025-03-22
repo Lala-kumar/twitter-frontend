@@ -30,7 +30,9 @@ const Posts = ({ feedType, username, userId }) => {
     queryKey: ["posts"],
     queryFn: async () => {
       try {
-        const res = await fetch(POST_ENDPOINT);
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}${POST_ENDPOINT}`
+        );
         const data = await res.json();
 
         if (!res.ok) {
