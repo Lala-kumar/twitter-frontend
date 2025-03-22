@@ -3,7 +3,7 @@ import PostSkeleton from "../skeletons/PostSkeleton";
 import { useQuery } from "@tanstack/react-query";
 import { useEffect } from "react";
 
-const Posts = ({ feedType, username, userId, handleTotalPosts }) => {
+const Posts = ({ feedType, username, userId }) => {
   const getPostEndpoint = () => {
     switch (feedType) {
       case "forYou":
@@ -32,8 +32,6 @@ const Posts = ({ feedType, username, userId, handleTotalPosts }) => {
       try {
         const res = await fetch(POST_ENDPOINT);
         const data = await res.json();
-
-        handleTotalPosts(data.length);
 
         if (!res.ok) {
           throw new Error(data.error || "Something went wrong");

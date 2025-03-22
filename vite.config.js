@@ -8,7 +8,7 @@ export default defineConfig({
     port: 3000,
     proxy: {
       "/api": {
-        target: "https://twitter-five-coral-53.vercel.app",
+        target: "https://twitter-backend-ruddy.vercel.app",
         changeOrigin: true,
       },
     },
