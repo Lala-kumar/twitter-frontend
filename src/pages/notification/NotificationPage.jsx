@@ -15,7 +15,10 @@ const NotificationPage = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_BASE_URL}/api/notifications`
+          `${import.meta.env.VITE_BASE_URL}/api/notifications`,
+          {
+            credentials: "include",
+          }
         );
         const data = await res.json();
         if (!res.ok) throw new Error(data.error || "Something went wrong");
@@ -33,6 +36,7 @@ const NotificationPage = () => {
           `${import.meta.env.VITE_BASE_URL}/api/notifications`,
           {
             method: "DELETE",
+            credentials: "include",
           }
         );
         const data = await res.json();

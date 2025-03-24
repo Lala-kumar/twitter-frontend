@@ -17,7 +17,12 @@ const Post = ({ post }) => {
     queryKey: ["authUser"],
     queryFn: async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/me`);
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/auth/me`,
+          {
+            credentials: "include",
+          }
+        );
         const data = await res.json();
         if (data.error) return null;
         if (!res.ok) {
@@ -46,6 +51,7 @@ const Post = ({ post }) => {
           `${import.meta.env.VITE_BASE_URL}/api/posts/${post._id}`,
           {
             method: "DELETE",
+            credentials: "include",
           }
         );
         const data = await res.json();
@@ -71,6 +77,7 @@ const Post = ({ post }) => {
           `${import.meta.env.VITE_BASE_URL}/api/posts/like/${post._id}`,
           {
             method: "POST",
+            credentials: "include",
           }
         );
         const data = await res.json();
@@ -112,6 +119,7 @@ const Post = ({ post }) => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ text: comment }),
+            credentials: "include",
           }
         );
         const data = await res.json();

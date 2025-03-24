@@ -14,7 +14,12 @@ const CreatePost = () => {
     queryKey: ["authUser"],
     queryFn: async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/me`);
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/auth/me`,
+          {
+            credentials: "include",
+          }
+        );
         const data = await res.json();
         if (data.error) return null;
         if (!res.ok) {
@@ -46,6 +51,7 @@ const CreatePost = () => {
               "Content-Type": "application/json",
             },
             body: JSON.stringify({ text, img }),
+            credentials: "include",
           }
         );
         const data = await res.json();

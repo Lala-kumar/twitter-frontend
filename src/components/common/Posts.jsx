@@ -31,7 +31,10 @@ const Posts = ({ feedType, username, userId }) => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_BASE_URL}${POST_ENDPOINT}`
+          `${import.meta.env.VITE_BASE_URL}${POST_ENDPOINT}`,
+          {
+            credentials: "include",
+          }
         );
         const data = await res.json();
 

@@ -30,7 +30,12 @@ const ProfilePage = () => {
     queryKey: ["authUser"],
     queryFn: async () => {
       try {
-        const res = await fetch(`${import.meta.env.VITE_BASE_URL}/api/auth/me`);
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/auth/me`,
+          {
+            credentials: "include",
+          }
+        );
         const data = await res.json();
         if (data.error) return null;
         if (!res.ok) {
@@ -54,7 +59,10 @@ const ProfilePage = () => {
     queryFn: async () => {
       try {
         const res = await fetch(
-          `${import.meta.env.VITE_BASE_URL}/api/users/profile/${username}`
+          `${import.meta.env.VITE_BASE_URL}/api/users/profile/${username}`,
+          {
+            credentials: "include",
+          }
         );
         const data = await res.json();
         if (!res.ok) {
