@@ -26,6 +26,30 @@ const ProfilePage = () => {
   const { username } = useParams();
 
   const { follow, isPending } = useFollow();
+
+  const { data: posts } = useQuery({
+    queryKey: ["posts"],
+    queryFn: async () => {
+      try {
+        const res = await fetch(
+          `${import.meta.env.VITE_BASE_URL}/api/posts/user/${username}`,
+          {
+            credentials: "include",
+          }
+        );
+        const data = await res.json();
+
+        if (!res.ok) {
+          throw new Error(data.error || "Something went wrong");
+        }
+
+        return data;
+      } catch (error) {
+        throw new Error(error);
+      }
+    },
+  });
+
   const { data: authUser } = useQuery({
     queryKey: ["authUser"],
     queryFn: async () => {
@@ -114,7 +138,10 @@ const ProfilePage = () => {
                 </Link>
                 <div className="flex flex-col">
                   <p className="font-bold text-lg">{user?.fullName}</p>
-                  <span className="text-sm text-slate-500">posts</span>
+                  <span className="text-sm text-slate-500">
+                    {" "}
+                    {posts?.length || 0} posts
+                  </span>
                 </div>
               </div>
               {/* COVER IMG */}

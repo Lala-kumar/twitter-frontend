@@ -65,36 +65,33 @@ const Sidebar = () => {
         <Link to="/" className="flex justify-center md:justify-start">
           <XSvg className="px-2 w-12 h-12 rounded-full fill-white hover:bg-stone-900" />
         </Link>
-        <ul className="flex flex-col gap-3 mt-4">
-          <li className="flex justify-center md:justify-start">
-            <Link
-              to="/"
-              className="flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
-            >
-              <MdHomeFilled className="w-8 h-8" />
-              <span className="text-lg hidden md:block">Home</span>
-            </Link>
-          </li>
-          <li className="flex justify-center md:justify-start">
-            <Link
-              to="/notifications"
-              className="flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
-            >
-              <IoNotifications className="w-6 h-6" />
-              <span className="text-lg hidden md:block">Notifications</span>
-            </Link>
-          </li>
 
-          <li className="flex justify-center md:justify-start">
-            <Link
-              to={`/profile/${authUser?.username}`}
-              className="flex gap-3 items-center hover:bg-stone-900 transition-all rounded-full duration-300 py-2 pl-2 pr-4 max-w-fit cursor-pointer"
-            >
-              <FaUser className="w-6 h-6" />
-              <span className="text-lg hidden md:block">Profile</span>
-            </Link>
-          </li>
+        <ul className="flex flex-col gap-3 mt-4">
+          <Link
+            to="/"
+            className="flex justify-center md:justify-start hover:bg-stone-900 transition-all rounded-full duration-300 cursor-pointer py-2 pl-2 pr-4"
+          >
+            <MdHomeFilled className="w-7 h-7" />
+            <span className="text-lg hidden md:block pl-2">Home</span>
+          </Link>
+
+          <Link
+            to="/notifications"
+            className="flex justify-center md:justify-start hover:bg-stone-900 transition-all rounded-full duration-300 cursor-pointer py-2 pl-2 pr-4"
+          >
+            <IoNotifications className="w-6 h-6" />
+            <span className="text-lg hidden md:block pl-3">Notifications</span>
+          </Link>
+
+          <Link
+            to={`/profile/${authUser?.username}`}
+            className="flex justify-center md:justify-start hover:bg-stone-900 transition-all rounded-full duration-300 cursor-pointer py-2 pl-2 pr-4"
+          >
+            <FaUser className="w-6 h-6" />
+            <span className="text-lg hidden md:block pl-3">Profile</span>
+          </Link>
         </ul>
+
         {authUser && (
           <Link
             to={`/profile/${authUser.username}`}
